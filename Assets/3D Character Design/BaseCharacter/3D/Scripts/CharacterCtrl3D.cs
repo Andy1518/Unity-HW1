@@ -11,6 +11,7 @@ public class CharacterCtrl3D : MonoBehaviour
     [SerializeField] float lockOnRadius = 10;
     [SerializeField] float lockOnAngle = 15;
     [SerializeField] bool alwaysLockOn = false;
+    [SerializeField] float moveSpeed = 50;
 
     Character3D character;
     CinemachineVirtualCameraBase vcFreeLook, vcLockTarget;

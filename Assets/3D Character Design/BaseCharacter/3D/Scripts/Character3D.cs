@@ -41,8 +41,8 @@ public class Character3D : MonoBehaviour
                 }
             }
         }
-
         animator.SetFloat("ySpeed", rigidbody.velocity.y);
+        
     }
 
     void GroundCheck() {
