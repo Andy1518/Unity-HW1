@@ -42,9 +42,10 @@ public class Character3D : MonoBehaviour
                     animator.SetFloat("zSpeed", move.z * axis.magnitude, 0.5f, Time.deltaTime);
                 }
             }
-            Vector3 velocity = axis * moveSpeed * move;
-            velocity.y = rigidbody.velocity.y;
-            rigidbody.velocity = velocity;
+            //Vector3 velocity = axis * moveSpeed * move;
+            //velocity.y = rigidbody.velocity.y;
+            //rigidbody.velocity = velocity;
+            //transform.localPosition += move * Time.fixedDeltaTime;
         }
         animator.SetFloat("ySpeed", rigidbody.velocity.y);
     }
@@ -73,8 +74,8 @@ public class Character3D : MonoBehaviour
     //{
     //    if (animator.GetBool("OnGround"))
     //    {
-    //        //Vector3 velocity = animator.deltaPosition / Time.deltaTime;
-    //        Vector3 velocity = transform.forward * moveSpeed;
+    //        Vector3 velocity = animator.deltaPosition / Time.deltaTime;
+    //        //Vector3 velocity = transform.forward * moveSpeed;
     //        velocity.y = rigidbody.velocity.y;
     //        rigidbody.velocity = velocity;
     //    }
