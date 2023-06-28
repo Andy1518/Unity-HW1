@@ -10,6 +10,8 @@ public class Character3D : MonoBehaviour
     [SerializeField] float jumpForce = 8;
     [SerializeField] float gravityScale = 2;
 
+    [SerializeField] float moveSpeed = 5.0f;
+
     Animator animator;
     Rigidbody rigidbody;
     
@@ -40,9 +42,11 @@ public class Character3D : MonoBehaviour
                     animator.SetFloat("zSpeed", move.z * axis.magnitude, 0.5f, Time.deltaTime);
                 }
             }
+            Vector3 velocity = axis * moveSpeed * move;
+            velocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = velocity;
         }
         animator.SetFloat("ySpeed", rigidbody.velocity.y);
-        
     }
 
     void GroundCheck() {
@@ -64,12 +68,15 @@ public class Character3D : MonoBehaviour
         else
             rigidbody.AddForce(Physics.gravity * gravityScale);
     }
-    
-    private void OnAnimatorMove() {
-        if(animator.GetBool("OnGround")) {
-            Vector3 velocity = animator.deltaPosition / Time.deltaTime;
-            velocity.y = rigidbody.velocity.y;
-            rigidbody.velocity = velocity;
-        }
-    }
+
+    //private void OnAnimatorMove()
+    //{
+    //    if (animator.GetBool("OnGround"))
+    //    {
+    //        //Vector3 velocity = animator.deltaPosition / Time.deltaTime;
+    //        Vector3 velocity = transform.forward * moveSpeed;
+    //        velocity.y = rigidbody.velocity.y;
+    //        rigidbody.velocity = velocity;
+    //    }
+    //}
 }

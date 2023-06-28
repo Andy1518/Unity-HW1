@@ -11,7 +11,6 @@ public class CharacterCtrl3D : MonoBehaviour
     [SerializeField] float lockOnRadius = 10;
     [SerializeField] float lockOnAngle = 15;
     [SerializeField] bool alwaysLockOn = false;
-    [SerializeField] float moveSpeed = 50;
 
     Character3D character;
     CinemachineVirtualCameraBase vcFreeLook, vcLockTarget;
@@ -31,6 +30,7 @@ public class CharacterCtrl3D : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         character = GetComponent<Character3D>();
+
         if(freeLookCamera) vcFreeLook = freeLookCamera.GetComponent<CinemachineVirtualCameraBase>();
         if(lockOnCamera) vcLockTarget = lockOnCamera.GetComponent<CinemachineVirtualCameraBase>();
         camTransform = Camera.main.transform;
@@ -95,5 +95,6 @@ public class CharacterCtrl3D : MonoBehaviour
             move = (camRight * axisInput.x + camForward * axisInput.y).normalized;
 
         character.Move(move, axisInput, Input.GetButtonDown("Jump"), lockOn);
+
     }
 }

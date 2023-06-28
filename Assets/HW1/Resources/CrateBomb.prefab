@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 7001074502111751581, guid: ae336580c2bb0064b854fd7ecf101d6c, type: 3}
+  hurt: 30

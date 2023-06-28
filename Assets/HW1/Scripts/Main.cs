@@ -8,14 +8,16 @@ public class Main : MonoBehaviour
     private static Main _instance = null;
     public static Main Instance() { return _instance; }
 
-    private GameObject enemyObject = null;
+    private GameObject bombObject = null;
+    private GameObject heartObject = null;
 
     //private LinkedList<GameObject> aaa;
-    private GameObject[] _enemies;
+    private GameObject[] _bombs;
+    private GameObject[] _hearts;
 
     //private Texture2D enemyTexture;
     //private Material enemyMaterial;
-   // public godViewCamCtrl camCtrl;
+    // public godViewCamCtrl camCtrl;
 
     private void Awake()
     {
@@ -46,8 +48,9 @@ public class Main : MonoBehaviour
 
     void FinishAsyncLoadGameObject(Object o)
     {
-        enemyObject = o as GameObject;
-        GenerateEnemies(20);
+        bombObject = o as GameObject;
+        GenerateBombs(20);
+        GenerateHearts(10);
         Debug.Log("FinishAsyncLoadObject " + o.name);
     }
 
@@ -100,37 +103,58 @@ public class Main : MonoBehaviour
         
     }
 
-    public void RemoveEnemy(GameObject go)
+    public void RemoveBomb(GameObject go)
     {
-        for (int i = 0; i < _enemies.Length; i++)
+        for (int i = 0; i < _bombs.Length; i++)
         {
-            if (_enemies[i] == go)
+            if (_bombs[i] == go)
             {
-                _enemies[i] = null;
+                _bombs[i] = null;
             }
         }
     }
 
-    private void GenerateEnemies(int num) {
+    private void GenerateBombs(int num) {
 
-        if(enemyObject == null)
+        if(bombObject == null)
         {
        //enemyObject = ResourceLoader.Instance().LoadGameObject("game1/BasicEnemy");
         }
-        _enemies = new GameObject[num]; 
+        _bombs = new GameObject[num]; 
         for (int i = 0; i < num; i++)
         {
-            GameObject go = GameObject.Instantiate(enemyObject);
+            GameObject go = GameObject.Instantiate(bombObject);
             //go.GetComponent<Renderer>().material.mainTexture = enemyTexture; 把讀進來的Texture(材質貼圖)變成Enemy的Texture。
             //go.GetComponent<Renderer>().material = enemyMaterial;//把讀進來的Material(材質球)變成Enemy的Material。
-            Vector3 vdir = new Vector3(Random.Range(0.8f, 1.0f), Random.Range(0.01f, 0.02f), Random.Range(0.5f, 0.6f));
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 50.0f));
             if(vdir.magnitude < 0.001f)
             {
                 vdir.x = 1.0f;
             }
             vdir.Normalize();
-            go.transform.position = vdir * Random.Range(90.0f, 100.0f);
-            _enemies[i] = go;
+            go.transform.position = vdir * Random.Range(20.0f, 40.0f);
+            _bombs[i] = go;
+        }
+    }
+    private void GenerateHearts(int num)
+    {
+
+        if (heartObject == null)
+        {
+            heartObject = ResourceLoader.Instance().LoadGameObject("Heart");
+        }
+        _hearts = new GameObject[num];
+        for (int i = 0; i < num; i++)
+        {
+            GameObject go = Instantiate(heartObject);
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 50.0f));
+            if (vdir.magnitude < 0.001f)
+            {
+                vdir.x = 1.0f;
+            }
+            vdir.Normalize();
+            go.transform.position = vdir * Random.Range(20.0f, 40.0f);
+            _hearts[i] = go;
         }
     }
 }
