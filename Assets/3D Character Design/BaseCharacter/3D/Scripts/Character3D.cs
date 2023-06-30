@@ -42,13 +42,16 @@ public class Character3D : MonoBehaviour
                     animator.SetFloat("zSpeed", move.z * axis.magnitude, 0.5f, Time.deltaTime);
                 }
             }
-            //Vector3 velocity = axis * moveSpeed * move;
-            //velocity.y = rigidbody.velocity.y;
-            //rigidbody.velocity = velocity;
+            Vector3 velocity = move * moveSpeed;
+            velocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = velocity;
             //transform.localPosition += move * Time.fixedDeltaTime;
+
         }
+
         animator.SetFloat("ySpeed", rigidbody.velocity.y);
     }
+
 
     void GroundCheck() {
         if (Physics.OverlapSphere(transform.position, groundCheckRadius, whatIsGround).Length > 0)
@@ -70,14 +73,20 @@ public class Character3D : MonoBehaviour
             rigidbody.AddForce(Physics.gravity * gravityScale);
     }
 
-    //private void OnAnimatorMove()
-    //{
-    //    if (animator.GetBool("OnGround"))
-    //    {
-    //        Vector3 velocity = animator.deltaPosition / Time.deltaTime;
-    //        //Vector3 velocity = transform.forward * moveSpeed;
-    //        velocity.y = rigidbody.velocity.y;
-    //        rigidbody.velocity = velocity;
-    //    }
-    //}
+/*    private void OnAnimatorMove()
+    {
+        if (animator.GetBool("OnGround"))
+        {
+            //Vector3 velocity = animator.deltaPosition / Time.deltaTime;
+            Vector3 velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeed;
+            //var vValue = Input.GetAxis("Vertical");
+            //Vector3 velocity = Vector3.zero;
+            //if (vValue < 0)
+            //{
+            //    transform.forward* Input.GetAxis("Vertical") * moveSpeed;
+            //}
+            velocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = velocity;
+        }
+    }*/
 }
