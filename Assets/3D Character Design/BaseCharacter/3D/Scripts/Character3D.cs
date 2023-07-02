@@ -33,6 +33,10 @@ public class Character3D : MonoBehaviour
                 move = transform.InverseTransformDirection(move);
                 ApplyRotation(move);
 
+                //Vector3 velocity = moveSpeed * move;
+                //velocity.y = rigidbody.velocity.y;
+                //rigidbody.velocity = velocity;
+
                 if (lockOn) {
                     animator.SetFloat("xSpeed", axis.x, 0.5f, Time.deltaTime);
                     animator.SetFloat("zSpeed", axis.y, 0.5f, Time.deltaTime);
@@ -42,9 +46,7 @@ public class Character3D : MonoBehaviour
                     animator.SetFloat("zSpeed", move.z * axis.magnitude, 0.5f, Time.deltaTime);
                 }
             }
-            Vector3 velocity = move * moveSpeed;
-            velocity.y = rigidbody.velocity.y;
-            rigidbody.velocity = velocity;
+
             //transform.localPosition += move * Time.fixedDeltaTime;
 
         }
@@ -73,12 +75,13 @@ public class Character3D : MonoBehaviour
             rigidbody.AddForce(Physics.gravity * gravityScale);
     }
 
-/*    private void OnAnimatorMove()
+    private void OnAnimatorMove()
     {
         if (animator.GetBool("OnGround"))
         {
             //Vector3 velocity = animator.deltaPosition / Time.deltaTime;
-            Vector3 velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeed;
+            //Vector3 velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * transform.forward*moveSpeed;
+            Vector3 velocity = Input.GetAxis("Vertical") * transform.forward * moveSpeed;
             //var vValue = Input.GetAxis("Vertical");
             //Vector3 velocity = Vector3.zero;
             //if (vValue < 0)
@@ -88,5 +91,5 @@ public class Character3D : MonoBehaviour
             velocity.y = rigidbody.velocity.y;
             rigidbody.velocity = velocity;
         }
-    }*/
+    }
 }
