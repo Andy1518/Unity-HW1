@@ -10,8 +10,6 @@ public class Character3D : MonoBehaviour
     [SerializeField] float jumpForce = 8;
     [SerializeField] float gravityScale = 2;
 
-    [SerializeField] float moveSpeed = 5.0f;
-
     Animator animator;
     Rigidbody rigidbody;
     
@@ -33,10 +31,6 @@ public class Character3D : MonoBehaviour
                 move = transform.InverseTransformDirection(move);
                 ApplyRotation(move);
 
-                //Vector3 velocity = moveSpeed * move;
-                //velocity.y = rigidbody.velocity.y;
-                //rigidbody.velocity = velocity;
-
                 if (lockOn) {
                     animator.SetFloat("xSpeed", axis.x, 0.5f, Time.deltaTime);
                     animator.SetFloat("zSpeed", axis.y, 0.5f, Time.deltaTime);
@@ -46,14 +40,10 @@ public class Character3D : MonoBehaviour
                     animator.SetFloat("zSpeed", move.z * axis.magnitude, 0.5f, Time.deltaTime);
                 }
             }
-
-            //transform.localPosition += move * Time.fixedDeltaTime;
-
         }
 
         animator.SetFloat("ySpeed", rigidbody.velocity.y);
     }
-
 
     void GroundCheck() {
         if (Physics.OverlapSphere(transform.position, groundCheckRadius, whatIsGround).Length > 0)
@@ -74,20 +64,10 @@ public class Character3D : MonoBehaviour
         else
             rigidbody.AddForce(Physics.gravity * gravityScale);
     }
-
-    private void OnAnimatorMove()
-    {
-        if (animator.GetBool("OnGround"))
-        {
-            //Vector3 velocity = animator.deltaPosition / Time.deltaTime;
-            //Vector3 velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * transform.forward*moveSpeed;
-            Vector3 velocity = Input.GetAxis("Vertical") * transform.forward * moveSpeed;
-            //var vValue = Input.GetAxis("Vertical");
-            //Vector3 velocity = Vector3.zero;
-            //if (vValue < 0)
-            //{
-            //    transform.forward* Input.GetAxis("Vertical") * moveSpeed;
-            //}
+    
+    private void OnAnimatorMove() {
+        if(animator.GetBool("OnGround")) {
+            Vector3 velocity = animator.deltaPosition / Time.deltaTime;
             velocity.y = rigidbody.velocity.y;
             rigidbody.velocity = velocity;
         }

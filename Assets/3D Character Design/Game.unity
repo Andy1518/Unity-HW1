@@ -4724,7 +4724,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3498751716843717542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264b5e61d0503d542b6e81d12ae6e323, type: 3}
+  m_Script: {fileID: 11500000, guid: 5964971e026d9df4ea67f979ff1d1541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whatIsGround:
@@ -6659,7 +6659,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5787447802349158941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2547dc9c107fe142aef7e2f4de63ae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 96b584fd15fdb3b4684d55f38a569a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnFilter:
@@ -6667,10 +6667,9 @@ MonoBehaviour:
     m_Bits: 128
   freeLookCamera: {fileID: 6669915493490256730}
   lockOnCamera: {fileID: 3987293685921306237}
-  lockOnRadius: 15
+  lockOnRadius: 10
   lockOnAngle: 15
   alwaysLockOn: 0
-  moveSpeed: 2
 --- !u!114 &6669915492640262303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6680,7 +6679,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5787447802349158941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264b5e61d0503d542b6e81d12ae6e323, type: 3}
+  m_Script: {fileID: 11500000, guid: 5964971e026d9df4ea67f979ff1d1541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whatIsGround:

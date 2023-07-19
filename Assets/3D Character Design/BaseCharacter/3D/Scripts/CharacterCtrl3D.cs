@@ -30,7 +30,6 @@ public class CharacterCtrl3D : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         character = GetComponent<Character3D>();
-
         if(freeLookCamera) vcFreeLook = freeLookCamera.GetComponent<CinemachineVirtualCameraBase>();
         if(lockOnCamera) vcLockTarget = lockOnCamera.GetComponent<CinemachineVirtualCameraBase>();
         camTransform = Camera.main.transform;
@@ -95,6 +94,5 @@ public class CharacterCtrl3D : MonoBehaviour
             move = (camRight * axisInput.x + camForward * axisInput.y).normalized;
 
         character.Move(move, axisInput, Input.GetButtonDown("Jump"), lockOn);
-
     }
 }
