@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class Main : MonoBehaviour
@@ -12,6 +13,7 @@ public class Main : MonoBehaviour
     private GameObject heartObject = null;
 
     //private LinkedList<GameObject> aaa;
+    private List<GameObjectData> _enemies = new List<GameObjectData>();
     private GameObject[] _bombs;
     private GameObject[] _hearts;
 
@@ -49,8 +51,13 @@ public class Main : MonoBehaviour
     void FinishAsyncLoadGameObject(Object o)
     {
         bombObject = o as GameObject;
-        GenerateBombs(20);
-        GenerateHearts(10);
+        //GenerateBombs(20);
+        //GenerateHearts(10);
+        //Debug.Log("FinishAsyncLoadObject " + o.name);
+        heartObject = o as GameObject;
+        ObjectPool.Instance().InitObjectPool(50, bombObject);
+        ObjectPool.Instance().InitObjectPool(20, heartObject);
+        // GenerateEnemies(20);
         Debug.Log("FinishAsyncLoadObject " + o.name);
     }
 
@@ -94,22 +101,39 @@ public class Main : MonoBehaviour
     void Update()
     {
         // aaa = new LinkedList<GameObject>();
-      //  if(Input.GetMouseButtonDown(0))
-      //  {
-       //     Debug.Log("down");
+        //  if(Input.GetMouseButtonDown(0))
+        //  {
+        //     Debug.Log("down");
         //    StartCoroutine(ResourceLoader.Instance().LoadGameObjectAsync("game1/BasicEnemy"));
-       // }
-       // Debug.Log("time " + Time.deltaTime);
-        
+        // }
+        // Debug.Log("time " + Time.deltaTime);
+        if (Input.GetMouseButtonDown(1))
+        {
+            GenerateBombs(10);
+            GenerateHearts(5);
+        }
     }
 
     public void RemoveBomb(GameObject go)
     {
-        for (int i = 0; i < _bombs.Length; i++)
+        //for (int i = 0; i < _bombs.Length; i++)
+        //{
+        //    if (_bombs[i] == go)
+        //    {
+        //        _bombs[i] = null;
+        //    }
+        //}
+        ObjectPool pool = ObjectPool.Instance();
+        for (int i = 0; i < _enemies.Count; i++)
         {
-            if (_bombs[i] == go)
+            Debug.Log("RemoveEnemy " + go.name + ":" + _enemies[i].go.name);
+            GameObjectData gData = _enemies[i];
+            if (gData.go == go)
             {
-                _bombs[i] = null;
+                Debug.Log("RemoveEnemyIII  " + i);
+                _enemies.RemoveAt(i);
+                pool.UnLoadObjectToPool(gData);
+
             }
         }
     }
@@ -120,10 +144,17 @@ public class Main : MonoBehaviour
         {
        //enemyObject = ResourceLoader.Instance().LoadGameObject("game1/BasicEnemy");
         }
-        _bombs = new GameObject[num]; 
+        if(_bombs == null)
+        {
+            _enemies = new List<GameObjectData>();
+        }
+        ObjectPool pool = ObjectPool.Instance();
+        //_bombs = new GameObject[num];
         for (int i = 0; i < num; i++)
         {
-            GameObject go = GameObject.Instantiate(bombObject);
+            GameObjectData gData = pool.LoadObjectFromPool(false);
+            GameObject go = gData.go;
+            //GameObject go = GameObject.Instantiate(bombObject);
             //go.GetComponent<Renderer>().material.mainTexture = enemyTexture; 把讀進來的Texture(材質貼圖)變成Enemy的Texture。
             //go.GetComponent<Renderer>().material = enemyMaterial;//把讀進來的Material(材質球)變成Enemy的Material。
             Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 50.0f));
@@ -133,28 +164,38 @@ public class Main : MonoBehaviour
             }
             vdir.Normalize();
             go.transform.position = vdir * Random.Range(20.0f, 40.0f);
-            _bombs[i] = go;
+            //_bombs[i] = go;
+            go.SetActive(true);
+            _enemies.Add(gData);
         }
     }
     private void GenerateHearts(int num)
     {
-
         if (heartObject == null)
         {
             heartObject = ResourceLoader.Instance().LoadGameObject("Heart");
         }
-        _hearts = new GameObject[num];
+        if (_hearts == null)
+        {
+            _enemies = new List<GameObjectData>();
+        }
+        ObjectPool pool = ObjectPool.Instance();
+        //_hearts = new GameObject[num];
         for (int i = 0; i < num; i++)
         {
-            GameObject go = Instantiate(heartObject);
-            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 50.0f));
+            GameObjectData gData = pool.LoadObjectFromPool(false);
+            GameObject go = gData.go;
+            //GameObject go = Instantiate(heartObject);
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(2.0f, 60.0f));
             if (vdir.magnitude < 0.001f)
             {
                 vdir.x = 1.0f;
             }
             vdir.Normalize();
             go.transform.position = vdir * Random.Range(20.0f, 40.0f);
-            _hearts[i] = go;
+            //_hearts[i] = go;
+            go.SetActive(true);
+            _enemies.Add(gData);
         }
     }
 }
