@@ -18,12 +18,13 @@ public class ObjectPool : MonoBehaviour
 
     public void InitObjectPool(int iCount, Object o)
     {
+        int i = 0;
         pObjectList = new ListObjectData();//new List<GameObjectData>();
         pObjectList.dataSrc = o;
         pObjectList.pDatas = new List<GameObjectData>();
-        int i = 0; 
+        
         for(i= 0; i < iCount; i++) {
-            GameObject go = GameObject.Instantiate(o) as GameObject;
+            GameObject go = GameObject.Instantiate(o,transform) as GameObject;
             GameObjectData gData = new GameObjectData();
             gData.go = go;
             gData.bUsing = false;
