@@ -33,7 +33,6 @@ public class PlayerCtrl : MonoBehaviour
             playerData.hp = 0;
         }
         Debug.Log(playerData.hp);
-        //UIManager.instance.UpdatePlayerUIInfo(playerData);
     }
     public void Heal(float heal)
     {
@@ -42,6 +41,9 @@ public class PlayerCtrl : MonoBehaviour
         {
             playerData.hp = playerData.maxHp;
         }
-        //UIManager.instance.UpdatePlayerUIInfo(playerData);
+    }
+    public void GetStar()
+    {
+        playerData.star += 1;
     }
 }

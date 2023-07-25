@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23000011854226900}
   - component: {fileID: 114000012340938906}
   - component: {fileID: -8822003643225593405}
+  - component: {fileID: -3703231065068779855}
   m_Layer: 0
   m_Name: BeveledStar
   m_TagString: Untagged
@@ -122,3 +123,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.75
   m_Center: {x: 0.0014882088, y: -0.0025726787, z: -0.046597403}
+--- !u!114 &-3703231065068779855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012510692222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059c0fe7a36943944949e74395589a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getStar: {fileID: 5251269724863715035, guid: 148616116ee66944fbc8326b8236ca90, type: 3}

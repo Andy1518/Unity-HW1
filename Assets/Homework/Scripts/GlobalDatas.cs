@@ -18,6 +18,7 @@ public class CPlayerData
 {
     public float maxHp;
     public float hp;
+    public float star;
 }
 [System.Serializable]
 public class CEnemyData

@@ -11,11 +11,13 @@ public class Main : MonoBehaviour
 
     private GameObject bombObject = null;
     private GameObject heartObject = null;
+    private GameObject starObject = null;
 
     //private LinkedList<GameObject> aaa;
     private List<GameObjectData> _enemies = new List<GameObjectData>();
     private GameObject[] _bombs;
     private GameObject[] _hearts;
+    private GameObject[] _stars;
 
     //private Texture2D enemyTexture;
     //private Material enemyMaterial;
@@ -75,7 +77,8 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             GenerateBombs(10);
-            GenerateHearts(5);
+            GenerateHearts(5); 
+            GenerateStars(5);
         }
     }
 
@@ -122,7 +125,7 @@ public class Main : MonoBehaviour
             //GameObject go = GameObject.Instantiate(bombObject);
             //go.GetComponent<Renderer>().material.mainTexture = enemyTexture; 把讀進來的Texture(材質貼圖)變成Enemy的Texture。
             //go.GetComponent<Renderer>().material = enemyMaterial;//把讀進來的Material(材質球)變成Enemy的Material。
-            Vector3 vdir = new Vector3(Random.Range(1.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 50.0f));
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(10.0f, 50.0f));
             if(vdir.magnitude < 0.001f)
             {
                 vdir.x = 1.0f;
@@ -151,7 +154,7 @@ public class Main : MonoBehaviour
             //GameObjectData gData = pool.LoadObjectFromPool(false);
             //GameObject go = gData.go;
             GameObject go = Instantiate(heartObject);
-            Vector3 vdir = new Vector3(Random.Range(1.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 60.0f));
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(10.0f, 60.0f));
             if (vdir.magnitude < 0.001f)
             {
                 vdir.x = 1.0f;
@@ -159,6 +162,35 @@ public class Main : MonoBehaviour
             vdir.Normalize();
             go.transform.position = vdir * Random.Range(20.0f, 40.0f);
             _hearts[i] = go;
+            //go.SetActive(true);
+            //_enemies.Add(gData);
+        }
+    }
+    private void GenerateStars(int num)
+    {
+        if (starObject == null)
+        {
+            starObject = ResourceLoader.Instance().LoadGameObject("BeveledStar");
+        }
+        //if (_hearts == null)
+        //{
+        //    _enemies = new List<GameObjectData>();
+        //}
+        //ObjectPool pool = ObjectPool.Instance();
+        _stars = new GameObject[num];
+        for (int i = 0; i < num; i++)
+        {
+            //GameObjectData gData = pool.LoadObjectFromPool(false);
+            //GameObject go = gData.go;
+            GameObject go = Instantiate(starObject);
+            Vector3 vdir = new Vector3(Random.Range(10.0f, 15.0f), Random.Range(1.0f, 1.2f), Random.Range(10.0f, 60.0f));
+            if (vdir.magnitude < 0.001f)
+            {
+                vdir.x = 1.0f;
+            }
+            vdir.Normalize();
+            go.transform.position = vdir * Random.Range(20.0f, 40.0f);
+            _stars[i] = go;
             //go.SetActive(true);
             //_enemies.Add(gData);
         }
