@@ -76,9 +76,9 @@ public class Main : MonoBehaviour
         // Debug.Log("time " + Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GenerateBombs(10);
-            GenerateHearts(5); 
-            GenerateStars(5);
+            GenerateBombs(5);
+            GenerateHearts(2); 
+            GenerateStars(2);
         }
     }
 
