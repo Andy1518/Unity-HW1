@@ -106,6 +106,10 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
         //if (Input.GetKeyDown(KeyCode.Return))
         //{
         //    if (SceneManager.GetActiveScene().name == "Menu")
@@ -119,5 +123,9 @@ public class MainManager : MonoBehaviour
         //        //SceneManager.LoadScene("menu", LoadSceneMode.Single);
         //    }
         //}
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

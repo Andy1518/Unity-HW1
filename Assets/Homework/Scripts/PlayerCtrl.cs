@@ -24,6 +24,16 @@ public class PlayerCtrl : MonoBehaviour
     {
         UIManager.instance.UpdatePlayerUIInfo(playerData);
     }
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.tag == "Portal")
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                collision.gameObject.transform.GetComponent<Portal>().ChangeScene();
+            }
+        }
+    }
     public void Hurt(float hurt)
     {
         animator.SetTrigger("Hurt");
