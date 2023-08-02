@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class Test : MonoBehaviour
+public class Spawn : MonoBehaviour
 {
     public GameObject spawnHere;        // 這是要把物件 Active的位置(你可以放到任何地方)
 
@@ -37,16 +37,25 @@ public class Test : MonoBehaviour
             {
                 clone = (GameObject)poolManager.ActiveObject(0); // 啟動物件Cat
                 clone.transform.parent = spawnHere.transform;
-                clone.transform.localPosition = new Vector3(i, i, i);
-                tmpObject[i] = clone;   // 暫存物件 等等用來示範丟回物件池
+                clone.transform.localPosition = new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 5.0f));
+                //tmpObject[i] = clone;   // 暫存物件 等等用來示範丟回物件池
             }
 
             clone = (GameObject)poolManager.ActiveObject(1); // 啟動物件Rabbit
             clone.transform.parent = spawnHere.transform;
-            clone.transform.localPosition = Vector3.one;
+            clone.transform.localPosition = Vector3.zero;
+
+            // 生10個會超過物件池基本數量 就會在實體化新的物件出來
+            for (int i = 0; i < 10; i++)
+            {
+                clone = (GameObject)poolManager.ActiveObject(1); // 啟動物件Rabbit
+                clone.transform.parent = spawnHere.transform;
+                clone.transform.localPosition = new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 1.2f), Random.Range(1.0f, 5.0f));
+                //tmpObject[i] = clone;   // 暫存物件 等等用來示範丟回物件池
+            }
         }
     }
-
+    /*
     void OnGUI()
     {
         if (GUI.Button(new Rect(100, 100, 100, 100), "Recover"))
@@ -59,5 +68,5 @@ public class Test : MonoBehaviour
             }
             // 經過 一段時間(可自訂) 物件池會清理掉多的物件 並保留(可自訂數量) 的物件
         }
-    }
+    }*/
 }

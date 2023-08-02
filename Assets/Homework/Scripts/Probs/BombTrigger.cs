@@ -29,7 +29,8 @@ public class BombTrigger : MonoBehaviour
             other.gameObject.SendMessage("Hurt", hurt, SendMessageOptions.DontRequireReceiver);//SendMessageOptions.DontRequireReceiver:通知遊戲執行Hurt方法，但不管對象身上有沒有此方法。
             //如果是RequireReceiver，通知完發現對象沒有這個方法後，Unity就會發生錯誤。
             //PlayerCtrl.instance.Hurt(hurt);
-            Destroy(gameObject);
+            Main.Instance().RemoveBomb(gameObject);
+            //Destroy(gameObject);
         }
         //Explosion(bomb);
         //bomb.SetActive(true);

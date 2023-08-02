@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         UIManager.instance.UpdatePlayerUIInfo(playerData);
         animator = GetComponent<Animator>();
     }

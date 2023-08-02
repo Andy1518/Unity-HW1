@@ -94,7 +94,7 @@ public class MainManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Menu")
         {
-            StartCoroutine(SceneLoader.Instance().ChangeSceneAsync("Stage1"));
+            StartCoroutine(SceneLoader.Instance().ChangeSceneAsync("Init"));
             // SceneManager.LoadScene("fps", LoadSceneMode.Single);
         }
         else
